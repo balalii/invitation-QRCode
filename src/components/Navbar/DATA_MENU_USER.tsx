@@ -1,4 +1,4 @@
-import { Banknote, BookUser, MessageSquareText, ScrollText, Settings } from 'lucide-react';
+import { HandHeart, BookUser, MessageSquareText, ScrollText, Settings } from 'lucide-react';
 
 type TDATA_MENU_USER = {
   title: string;
@@ -10,26 +10,26 @@ export const DATA_MENU_USER: TDATA_MENU_USER[] = [
   {
     title: 'Undangan',
     path: '/invitation',
-    svg: <ScrollText />,
+    svg: <ScrollText strokeWidth={1.5} />,
   },
   {
-    title: 'Sumbangan',
+    title: 'Donasi',
     path: '/donation',
-    svg: <Banknote />,
+    svg: <HandHeart strokeWidth={1.5} />,
   },
   {
-    title: 'Buku Tamu',
+    title: 'Tamu',
     path: '/guest-book',
-    svg: <BookUser />,
+    svg: <BookUser strokeWidth={1.5} />,
   },
   {
     title: 'Ucapan',
     path: '/comments',
-    svg: <MessageSquareText />,
+    svg: <MessageSquareText strokeWidth={1.5} />,
   },
   {
-    title: 'Pengaturan',
+    title: 'Settings',
     path: '/settings',
-    svg: <Settings />,
+    svg: <Settings strokeWidth={1.5} />,
   },
 ];
