@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import MenuUserMobile from '@/components/Navbar/MenuUserMobile';
+import Footer from '@/components/elements/Footer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,9 +20,7 @@ export default function RootLayout({
           <div className="md:w-[500px] border border-gray-100 shadow-sm border-b-0 bg-gray-50/30 mx-auto space-y-20 min-h-screen">
             {children}
             {/* Footer */}
-            <footer className="text-sm text-center text-gray-600">
-              <p className="pt-5 pb-24 ">Create with love Kelompok 6 💙</p>
-            </footer>
+            <Footer />
             {/* nav */}
             <MenuUserMobile />
             {/* nav end */}

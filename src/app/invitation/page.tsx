@@ -149,13 +149,13 @@ export default function Page() {
 
       {/* Section 5 */}
       <div className="px-5 mt-10 space-y-5">
-        <div className="w-full bg-[var(--secondary-color)] font-light uppercase py-4 px-5 rounded-lg">3 COMMENTS</div>
-        <div className="space-y-3">
+        <div className="w-full bg-[var(--secondary-color)] font-light uppercase py-4 px-5 rounded-lg">3 Kartu Ucapan</div>
+        {/* <div className="space-y-3">
           <label htmlFor="" className="font-medium text-gray-600">
             Nama
           </label>
           <input type="text" className="bg-[var(--secondary-color)] py-4 px-5 border-none rounded-lg w-full" />
-        </div>
+        </div> */}
         <div className="space-y-3">
           <label htmlFor="" className="font-medium text-gray-600">
             Ucapan
@@ -167,34 +167,34 @@ export default function Page() {
 
       {/* Massage */}
       <div className="px-5 space-y-7">
-        <div className="grid grid-cols-7">
+        <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
             <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>USER</AvatarFallback>
           </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-6 shadow-md">
+          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
             <span className="font-semibold">Ucup Bin Selamet</span>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-7">
+        <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
             <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>USER</AvatarFallback>
           </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-6 shadow-md">
+          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
             <span className="font-semibold">Ucup Bin Selamet</span>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-7">
+        <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
             <AvatarImage src="https://github.com/balalii.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-6 shadow-md">
+          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
             <span className="font-semibold">Ucup Bin Selamet</span>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
           </div>

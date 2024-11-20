@@ -13,6 +13,11 @@ export const DATA_MENU_USER: TDATA_MENU_USER[] = [
     svg: <ScrollText />,
   },
   {
+    title: 'Ucapan',
+    path: '/comments',
+    svg: <MessageSquareText />,
+  },
+  {
     title: 'Buku Tamu',
     path: '/guest-book',
     svg: <BookUser />,
@@ -21,11 +26,6 @@ export const DATA_MENU_USER: TDATA_MENU_USER[] = [
     title: 'Sumbangan',
     path: '/donation',
     svg: <Banknote />,
-  },
-  {
-    title: 'Komentar',
-    path: '/comment',
-    svg: <MessageSquareText />,
   },
   {
     title: 'Pengaturan',
