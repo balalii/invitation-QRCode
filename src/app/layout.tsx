@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main>
-          <div className="md:w-[500px] border border-gray-100 shadow-sm border-b-0 bg-white mx-auto space-y-20 min-h-screen">
+          <div className="md:w-[500px] border border-gray-100 shadow-sm border-b-0 bg-gray-50/30 mx-auto space-y-20 min-h-screen">
             {children}
             {/* Footer */}
             <footer className="text-sm text-center text-gray-600">
