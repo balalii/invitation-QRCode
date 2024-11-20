@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import MenuUserMobile from '@/components/Navbar/MenuUserMobile';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +14,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <main>
+          <div className="md:w-[500px] border border-gray-100 shadow-sm border-b-0 bg-white mx-auto space-y-20 min-h-screen">
+            {children}
+            {/* Footer */}
+            <footer className="text-sm text-center text-gray-600">
+              <p className="pt-5 pb-24 ">Create with love Kelompok 6 💙</p>
+            </footer>
+            {/* nav */}
+            <MenuUserMobile />
+            {/* nav end */}
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
