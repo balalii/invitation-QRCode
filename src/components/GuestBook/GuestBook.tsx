@@ -70,7 +70,7 @@ export default function GuestBook() {
     {
       accessorKey: 'status',
       header: 'Keterangan ',
-      cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
+      cell: ({ row }) => <div className="capitalize pr-6">{row.getValue('status')}</div>,
     },
     {
       accessorKey: 'action',

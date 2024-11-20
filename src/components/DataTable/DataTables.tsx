@@ -58,7 +58,7 @@ export function DataTables<T>({ data, columns, placeholderSearch1, placeholderSe
                   placeholder={placeholderSearch1}
                   value={(table.getColumn(idColumnSearch1)?.getFilterValue() as string) ?? ''}
                   onChange={(event) => table.getColumn(idColumnSearch1)?.setFilterValue(event.target.value)}
-                  className="max-w-sm mt-3 md:mt-0"
+                  className="md:max-w-sm w-[20rem] md:w-[15rem] mt-3 md:mt-0"
                 />
               )}
               {!!idColumnSearch2 && (
@@ -66,7 +66,7 @@ export function DataTables<T>({ data, columns, placeholderSearch1, placeholderSe
                   placeholder={placeholderSearch2}
                   value={(table.getColumn(idColumnSearch2)?.getFilterValue() as string) ?? ''}
                   onChange={(event) => table.getColumn(idColumnSearch2)?.setFilterValue(event.target.value)}
-                  className="max-w-sm mt-3 md:mt-0"
+                  className="md:max-w-sm w-[20rem] md:w-[15rem] mt-3 md:mt-0"
                 />
               )}
             </div>

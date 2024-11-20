@@ -18,7 +18,7 @@ export const DATA_MENU_USER: TDATA_MENU_USER[] = [
     svg: <BookUser />,
   },
   {
-    title: 'Donasi',
+    title: 'Sumbangan',
     path: '/donation',
     svg: <Banknote />,
   },
