@@ -1,3 +1,4 @@
+import AddDonation from '@/components/Donation/AddDonation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -143,8 +144,8 @@ export default function Page() {
       {/* Section 4 */}
       <div className="flex flex-col font-bold justify-center items-center text-center px-4">
         <h5 className="text-2xl uppercase roboto">Wedding Gift</h5>
-        <p className="uppercase roboto">Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui virtual account atau e-wallet di bawah ini:</p>
-        <button className="uppercase mt-4 rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 py-1.5 pb-2 shadow">Kirim Hadiah</button>
+        <p className="uppercase roboto">Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui tombol di bawah ini:</p>
+        <AddDonation />
       </div>
 
       {/* Section 5 */}

@@ -12,7 +12,7 @@ export default function MenuUserMobile() {
   const classActive = 'text-[var(--primary-color)] font-medium';
 
   return (
-    <nav className={`${pathname === '/' ? 'hidden' : 'block'} fixed bottom-0 w-full md:w-[500px] z-50  `}>
+    <nav className={`${pathname === '/' || pathname === '/success-payment' ? 'hidden' : 'block'} fixed bottom-0 w-full md:w-[500px] z-50  `}>
       <ul className="flex flex-row justify-evenly bg-white border-t py-4 w-screen md:w-[500px] rounded-t-3xl container mx-auto">
         {/* menu user  */}
         {DATA_MENU_USER.map((menu, idx) =>

@@ -10,10 +10,15 @@ export default function Home() {
 
         <Image width={500} height={500} src="/assets/home.png" className="w-[40vh]" alt="" />
 
-        <Link href="/invitation" className="bg-[var(--primary-color)] text-white rounded-full pt-2.5 pb-3 w-full shadow-lg capitalize font-bold text-center">
+      <div className="space-y-5 w-full flex flex-col">
+          <Link href="/invitation" className="bg-[var(--primary-color)] border border-[var(--primary-color)] text-white rounded-full pt-2.5 pb-3 w-full shadow-lg capitalize font-bold text-center">
           Buka Undangan
         </Link>
+           <Link href="/" className="bg-transparant border border-[var(--primary-color)] text-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-white rounded-full pt-2.5 pb-3 w-full shadow-lg capitalize font-bold text-center">
+          Scan QR
+        </Link>
+        </div>
       </div>
-    </main>
+    </main> 
   );
 }
