@@ -65,7 +65,7 @@ export default function GuestBook() {
     {
       accessorKey: 'name',
       header: 'Nama',
-      cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
+      cell: ({ row }) => <div className="capitalize min-w-48">{row.getValue('name')}</div>,
     },
     {
       accessorKey: 'status',
@@ -94,9 +94,9 @@ export default function GuestBook() {
               <p className="text-lg font-semibold text-gray-900">{434}</p>
             </div>
 
-            <span className="rounded-full bg-gray-100 p-3 text-gray-600">
+            {/* <span className="rounded-full bg-gray-100 p-3 text-gray-600">
               <ScrollText />
-            </span>
+            </span> */}
           </div>
         </article>
 
@@ -108,9 +108,9 @@ export default function GuestBook() {
               <p className="text-lg font-semibold text-gray-900">{455}</p>
             </div>
 
-            <span className="rounded-full bg-green-100 p-3 text-green-600">
+            {/* <span className="rounded-full bg-green-100 p-3 text-green-600">
               <UsersRound />
-            </span>
+            </span> */}
           </div>
         </article>
       </div>

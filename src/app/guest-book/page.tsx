@@ -1,6 +1,7 @@
 'use client';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import GuestBook from '@/components/GuestBook/GuestBook';
+import QRCode from 'react-qr-code';
 
 export default function Page() {
   return (
@@ -17,7 +18,14 @@ export default function Page() {
         <TabsContent value="guest-book" className="space-y-6">
           <GuestBook />
         </TabsContent>
-        <TabsContent value="Scane QR">f</TabsContent>
+        <TabsContent value="Scane QR">
+          <div className="flex flex-col space-y-2">
+            <h3 className="font-bold text-2xl capitalize text-center mb-6 mt-10">Scan QR</h3>
+          </div>
+          <div style={{ height: 'auto', margin: '0 auto', maxWidth: 350, width: '100%' }}>
+            <QRCode size={256} style={{ height: 'auto', maxWidth: '100%', width: '100%' }} value={'Hallo world'} viewBox={`0 0 256 256`} />
+          </div>
+        </TabsContent>
       </Tabs>
     </div>
   );
