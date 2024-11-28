@@ -43,7 +43,7 @@ export default function Page() {
             <InputForm errors={undefined} type={'date'} id="name" label="Tanggal (Akad)" />
           </div>
           <div className="col-span-full xl:col-span-12">
-            <InputForm errors={undefined} type={'time'} id="name" label="Tanggal (Akad)" />
+            <InputForm errors={undefined} type={'time'} id="name" label="Jam (Akad)" />
           </div>
           <div className="col-span-full xl:col-span-12">
             <InputForm
@@ -62,7 +62,7 @@ export default function Page() {
             <InputForm errors={undefined} type={'date'} id="name" label="Tanggal (Resepsi)" />
           </div>
           <div className="col-span-full xl:col-span-12">
-            <InputForm errors={undefined} type={'time'} id="name" label="Tanggal (Resepsi)" />
+            <InputForm errors={undefined} type={'time'} id="name" label="Jam (Resepsi)" />
           </div>
           <div className="col-span-full xl:col-span-12">
             <InputForm

@@ -56,6 +56,16 @@ export default function AddDonation() {
   //       queryClient.invalidateQueries({ queryKey: ['purchaseOrder', formattedDate, sortData] });
   //     }, [errorMessage, queryClient, toast]);
 
+  const dataBank = [
+    {
+      label: 'BRI',
+      value: 'bri',
+    },
+    {
+      label: 'Mandiri',
+      value: 'mandiri',
+    },
+  ];
   return (
     // <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
     <Dialog>
@@ -72,7 +82,22 @@ export default function AddDonation() {
                 {/* <input type="text" name="token" hidden readOnly defaultValue={tokenUser} value={tokenUser} /> */}
                 <div className="col-span-full xl:col-span-12">
                   <InputForm errors={undefined} type={'text'} id="name" label="Pilih Bank" />
+                  <InputForm
+                    errors={undefined}
+                    placeholder="Pilih Bank"
+                    id="role"
+                    label="Bank"
+                    className="cursor-pointer"
+                    options={
+                      dataBank &&
+                      dataBank?.map((data) => ({
+                        label: data.label,
+                        value: data.value,
+                      }))
+                    }
+                  />
                 </div>
+
                 <div className="col-span-full xl:col-span-12">
                   <InputForm errors={undefined} type={'text'} id="no" label="Nominal Transfer" />
                 </div>
