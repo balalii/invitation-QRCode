@@ -11,13 +11,31 @@ export default function Page() {
         <div className="absolute inset-0 flex items-center justify-center">
           <Image width={500} height={500} src="/assets/bg.png" className="opacity-90 w-full h-full object-cover" alt="Background" />
         </div>
-        <div className="flex flex-col items-center justify-start h-full pt-20 ">
-          <p className="text-2xl font-bold mb-2 arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</p>
-          <p className="text-lg font-bold mb-2 text-center roboto">
-            Assalamualaikum Wr. Wb
-            <br />
-            Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan kami.
-          </p>
+        <div className="flex flex-col items-center justify-around text-center h-full ">
+          <div>
+            <p className="text-2xl font-bold mb-2 arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</p>
+            <p className="text-lg font-bold mb-2 text-center roboto">
+              Assalamualaikum Wr. Wb
+              <br />
+              Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan kami.
+            </p>
+          </div>
+
+          <div className="text-center space-y-5 ">
+            <div>
+              <p className="text-5xl italianno">Halim Al Anshori</p>
+              <p className="text-sm opensans">Putra dari Bapak Buchtiar & Ibu Sulastri</p>
+              <p className="text-sm opensans">Beralamat di Sungai Bahar, Muaro Jambi, Jambi</p>
+            </div>
+
+            <div className="text-6xl italianno">&</div>
+
+            <div>
+              <p className="text-5xl italianno">Nisa Rahma Widia</p>
+              <p className="text-sm opensans">Putri dari Bapak Sutejo & Ibu Ngatijah</p>
+              <p className="text-sm opensans">Beralamat di Kalibeber, Mojotengah, Wonosobo</p>
+            </div>
+          </div>
         </div>
       </div>
 
