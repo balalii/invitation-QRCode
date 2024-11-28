@@ -81,7 +81,6 @@ export default function AddDonation() {
               <div className="text-left !mt-2  grid grid-cols-12 gap-4 ">
                 {/* <input type="text" name="token" hidden readOnly defaultValue={tokenUser} value={tokenUser} /> */}
                 <div className="col-span-full xl:col-span-12">
-                  <InputForm errors={undefined} type={'text'} id="name" label="Pilih Bank" />
                   <InputForm
                     errors={undefined}
                     placeholder="Pilih Bank"
