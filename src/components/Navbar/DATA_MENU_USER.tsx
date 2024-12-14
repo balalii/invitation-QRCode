@@ -9,7 +9,7 @@ type TDATA_MENU_USER = {
 export const DATA_MENU_USER: TDATA_MENU_USER[] = [
   {
     title: 'Undangan',
-    path: '/invitation',
+    path: '/',
     svg: <ScrollText strokeWidth={1.5} />,
   },
   {

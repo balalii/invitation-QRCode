@@ -6,65 +6,33 @@ import { Banknote, Landmark } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import InputForm from '../Form/InputForm';
 import ButtonForm from '../Form/ButtonForm';
+import { useFormState } from 'react-dom';
+import { createBank } from '@/actions/bank.action';
+import toast from 'react-hot-toast';
 
 export default function AddBank() {
-  // const dataAuth = useUser();
-  // const tokenUser = dataAuth.data?.token;
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [errorMessage, formAction] = useFormState(createBank, undefined);
 
-  //    const searchParams = useSearchParams();
-  //     const sortData = searchParams.get('filterData') && searchParams.get('filterData') ? (searchParams.get('filterData') as string) : '';
-
-  //     const formattedDateRange = useFormattedDateRange();
-  //     const formattedDate = formattedDateRange;
-  //     // react query
-  //     const queryClient = useQueryClient();
-
-  //     const [errorMessage, formAction] = useFormState(addDebt, undefined);
-
-  //     // nominal
-  //     const { nominal: nominal1, handleNominal: handleNominal1 } = useInputRupiah();
-
-  //     // Function to handle change in nominal inputs
-  //     const handleChange = (value: string) => {
-  //       handleNominal1(value);
-  //     };
-
-  //     const [dialogOpen, setDialogOpen] = useState(false);
-
-  //     useEffect(() => {
-  //       // jika berhasil berikan notif
-  //       if (errorMessage && 'status' in errorMessage && errorMessage.status === 200) {
-  //         toast({
-  //           title: 'Status Pembayaran',
-  //           description: 'Pembayaran berhasil ditambahkan!.',
-  //         });
-  //         // Reset nominal and valuePayment to default values
-  //         handleChange('');
-  //         // Close the dialog
-  //         setDialogOpen(false);
-  //       }
-  //       if (errorMessage && 'status' in errorMessage && errorMessage.status !== 200) {
-  //         toast({
-  //           title: 'Status Pembayaran',
-  //           description: 'Pembayaran gagal ditambahkan.',
-  //           variant: 'destructive',
-  //         });
-  //         // redirect('/ecommerce/products');
-  //       }
-
-  //       queryClient.invalidateQueries({ queryKey: ['purchaseOrder', formattedDate, sortData] });
-  //     }, [errorMessage, queryClient, toast]);
+  React.useEffect(() => {
+    // jika berhasil berikan notif
+    if (errorMessage && 'success' in errorMessage && errorMessage.success === true) {
+      toast('Data berhasil disimpan.', {
+        icon: '✔️',
+      });
+      setDialogOpen(false);
+    }
+  }, [errorMessage, toast]);
 
   return (
-    // <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <Button className="bg-[var(--primary-color)]">
           Tambah bank <Landmark />
         </Button>
       </DialogTrigger>
       <DialogContent className="py-12 lg:py-8 max-h-screen overflow-y-auto">
-        <form>
+        <form action={formAction}>
           <DialogHeader>
             <DialogTitle className="text-center lg:text-left ">Tambah bank</DialogTitle>
             <DialogDescription className=" space-y-2  ">
@@ -75,7 +43,10 @@ export default function AddBank() {
                   <InputForm errors={undefined} type={'text'} id="name" label="Nama Bank" />
                 </div>
                 <div className="col-span-full xl:col-span-12">
-                  <InputForm errors={undefined} type={'text'} id="no" label="Nomor Rekening" />
+                  <InputForm errors={undefined} type={'text'} id="recipient" label="Nama Penerima" />
+                </div>
+                <div className="col-span-full xl:col-span-12">
+                  <InputForm errors={undefined} type={'text'} id="accountNumber" label="Nomor Rekening" />
                 </div>
                 {/* <div className="col-span-full xl:col-span-6">
                   <InputForm errors={undefined} id="nominal" label="Nominal " value={'hallo'} />

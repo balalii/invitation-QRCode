@@ -1,9 +1,50 @@
+import { getBank } from '@/actions/bank.action';
+import { getInvitationGreeting } from '@/actions/invitationGreeting.action';
+import { getInvited } from '@/actions/invited.action';
+import { getWeding } from '@/actions/wedding.action';
+import AddComments from '@/components/Comments/AddComment';
 import AddDonation from '@/components/Donation/AddDonation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import formatDate from '@/lib/formatDate';
+import MetaData from '@/lib/MetaData';
+import { Bank, Wedding } from '@prisma/client';
 import Image from 'next/image';
-import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-export default function Page() {
+// Metadata
+export async function generateMetadata({ params }: { params: Promise<{ url: string }> }) {
+  const url = (await params).url;
+  const { invited, invitedError } = await getInvited(url); //user
+
+
+  try {
+    return await MetaData({
+      title: `Kepada: ${invited?.name}`,
+      desc: ` Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan kami. `,
+      imgUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/wedding/1.png`,
+      linkUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/welcome/${invited?.code}`,
+    });
+  } catch (error) {
+    return {
+      title: 'Not Found',
+      description: 'The page you are looking for does not exist',
+    };
+  }
+}
+
+export default async function Page({ params }: { params: Promise<{ url: string }> }) {
+   const url = (await params).url;
+
+  // Fetch data
+  const { invited, invitedError } = await getInvited(url); //user
+  const { bank, errorBank } = await getBank(); //banklist
+  const { wedding, error } = await getWeding(); //detail wedding
+  const { invitationGreeting, errorInvitationGreeting } = await getInvitationGreeting(); //detail wedding
+
+  if (!wedding || (Array.isArray(wedding) && wedding.length === 0) || !wedding || !invited || !bank || !invitationGreeting) {
+    notFound();
+  }
+
   return (
     <>
       {/* Header */}
@@ -23,17 +64,21 @@ export default function Page() {
 
           <div className="text-center space-y-5 ">
             <div>
-              <p className="text-5xl italianno">Halim Al Anshori</p>
-              <p className="text-sm opensans">Putra dari Bapak Buchtiar & Ibu Sulastri</p>
-              <p className="text-sm opensans">Beralamat di Sungai Bahar, Muaro Jambi, Jambi</p>
+              <p className="text-5xl italianno">{wedding[0].groomName}</p>
+              <p className="text-sm opensans">
+                Putra dari Bapak {wedding[0].groomFatherName} & Ibu {wedding[0].groomMotherName}
+              </p>
+              <p className="text-sm opensans">Beralamat di {wedding[0].groomAddress}</p>
             </div>
 
             <div className="text-6xl italianno">&</div>
 
             <div>
-              <p className="text-5xl italianno">Nisa Rahma Widia</p>
-              <p className="text-sm opensans">Putri dari Bapak Sutejo & Ibu Ngatijah</p>
-              <p className="text-sm opensans">Beralamat di Kalibeber, Mojotengah, Wonosobo</p>
+              <p className="text-5xl italianno">{wedding[0].brideName}</p>
+              <p className="text-sm opensans">
+                Putri dari Bapak {wedding[0].brideFatherName} & Ibu {wedding[0].brideMotherName}
+              </p>
+              <p className="text-sm opensans">Beralamat di {wedding[0].brideAddress}</p>
             </div>
           </div>
         </div>
@@ -66,18 +111,18 @@ export default function Page() {
             <div className="mt-4 flex flex-col items-start space-y-2">
               <div className="flex items-center">
                 <Image alt="Calendar icon" className="mr-2" height="20" src="/assets/tgl.png" width="20" />
-                <span> Rabu, 1 Januari 2024 </span>
+                <span> {formatDate(new Date(wedding[0].akadDate).toISOString().split('T')[0])} </span>
               </div>
               <div className="flex items-center">
                 <Image alt="Clock icon" className="mr-2" height="20" src="/assets/jam.png" width="20" />
-                <span> 08.00-11.00 </span>
+                <span> {wedding[0].akadTime}-Selesai </span>
               </div>
               <div className="flex items-center">
                 <Image alt="Location icon" className="mr-2" height="20" src="/assets/lok.png" width="20" />
-                <span> GOR Drs. H. Poedjihardjo </span>
+                <span> {wedding[0].akadLocation} </span>
               </div>
             </div>
-            <a className="mt- 6 inline-block w-full" href="https://maps.app.goo.gl/RkD7cV5x23SjH6PD6" target="_blank">
+            <a className="mt- 6 inline-block w-full" href={wedding[0].akadGoogleMapLink} target="_blank">
               <button className="mt-6 bg-[#b08b5b] text-white py-2 px-4 rounded-full shadow-md w-full">OPEN MAP</button>
             </a>
           </div>
@@ -93,18 +138,18 @@ export default function Page() {
             <div className="mt-4 flex flex-col items-start space-y-2">
               <div className="flex items-center">
                 <Image alt="Calendar icon" className="mr-2" height="20" src="/assets/tgl.png" width="20" />
-                <span> Rabu, 1 Januari 2024 </span>
+                <span> {formatDate(new Date(wedding[0].resepsiDate).toISOString().split('T')[0])} </span>
               </div>
               <div className="flex items-center">
                 <Image alt="Clock icon" className="mr-2" height="20" src="/assets/jam.png" width="20" />
-                <span> 08.00-11.00 </span>
+                <span> {wedding[0].resepsiTime}-Selesai </span>
               </div>
               <div className="flex items-center">
                 <Image alt="Location icon" className="mr-2" height="20" src="/assets/lok.png" width="20" />
-                <span> GOR Drs. H. Poedjihardjo </span>
+                <span> {wedding[0].resepsiLocation} </span>
               </div>
             </div>
-            <a className="mt-6 inline-block w-full" href="https://maps.app.goo.gl/RkD7cV5x23SjH6PD6" target="_blank">
+            <a className="mt-6 inline-block w-full" href={wedding[0].resepsiGoogleMapLink} target="_blank">
               <button className="mt-6 bg-[#b08b5b] text-white py-2 px-4 rounded-full shadow-md w-full">OPEN MAP</button>
             </a>
           </div>
@@ -118,41 +163,41 @@ export default function Page() {
 
           <div className="flex flex-col space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg overflow-hidden flex flex-col justify-between">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 1" />
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 2" />
-              </div>
               <div className="rounded-lg overflow-hidden">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img5.png" width="300" alt="Image 3" />
+                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/wedding/image 27.png" width="300" alt="Image 3" />
+              </div>
+              <div className="rounded-lg overflow-hidden flex flex-col space-y-3 h-full">
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 28.png" width="300" alt="Image 1" />
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 29.png" width="300" alt="Image 2" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-lg overflow-hidden">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img5.png" width="300" alt="Image 4" />
+                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/wedding/image 31.png" width="300" alt="Image 3" />
               </div>
               <div className="rounded-lg overflow-hidden">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img5.png" width="300" alt="Image 5" />
+                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/wedding/image 30.png" width="300" alt="Image 3" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-lg overflow-hidden">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img5.png" width="300" alt="Image 6" />
+                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/wedding/image 32.png" width="300" alt="Image 3" />
               </div>
-              <div className="rounded-lg overflow-hidden flex flex-col justify-between">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 7" />
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 8" />
+              <div className="rounded-lg overflow-hidden flex flex-col space-y-3 h-full">
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 34.png" width="300" alt="Image 1" />
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 33.png" width="300" alt="Image 2" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg overflow-hidden flex flex-col justify-between">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 9" />
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img6.png" width="300" alt="Image 10" />
+              <div className="rounded-lg overflow-hidden flex flex-col space-y-3 h-full">
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 36.png" width="300" alt="Image 1" />
+                <Image className="shadow-md border rounded-lg w-full h-[45%]" height="400" src="/assets/wedding/image 37.png" width="300" alt="Image 2" />
               </div>
               <div className="rounded-lg overflow-hidden">
-                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/img5.png" width="300" alt="Image 11" />
+                <Image className="shadow-md border rounded-lg w-full" height="400" src="/assets/wedding/image 35.png" width="300" alt="Image 3" />
               </div>
             </div>
           </div>
@@ -163,61 +208,29 @@ export default function Page() {
       <div className="flex flex-col font-bold justify-center items-center text-center px-4">
         <h5 className="text-2xl uppercase roboto">Wedding Gift</h5>
         <p className="uppercase roboto">Bagi bapak/ibu/saudara/i yang ingin mengirimkan hadiah pernikahan dapat melalui tombol di bawah ini:</p>
-        <AddDonation />
+        <AddDonation bank={bank as Bank[]} id={invited?.id as number} />
       </div>
 
       {/* Section 5 */}
-      <div className="px-5 mt-10 space-y-5">
-        <div className="w-full bg-[var(--secondary-color)] font-light uppercase py-4 px-5 rounded-lg">3 Kartu Ucapan</div>
-        {/* <div className="space-y-3">
-          <label htmlFor="" className="font-medium text-gray-600">
-            Nama
-          </label>
-          <input type="text" className="bg-[var(--secondary-color)] py-4 px-5 border-none rounded-lg w-full" />
-        </div> */}
-        <div className="space-y-3">
-          <label htmlFor="" className="font-medium text-gray-600">
-            Ucapan
-          </label>
-          <textarea name="" id="" rows={6} className="bg-[var(--secondary-color)] py-4 px-5 border-none rounded-xl w-full"></textarea>
-        </div>
-        <button className="uppercase mt-4 rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 py-1.5 pb-2 shadow">Kirim</button>
-      </div>
+      <AddComments lengthComment={invitationGreeting.length} id={invited.id}/>
 
       {/* Massage */}
       <div className="px-5 space-y-7">
-        <div className="grid grid-cols-6">
+        {
+          invitationGreeting.map((data, idx)=>(
+            <div key={idx} className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
             <AvatarImage src="https://github.com/balalii.png" />
             <AvatarFallback>USER</AvatarFallback>
           </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
-            <span className="font-semibold">Ucup Bin Selamet</span>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
+          <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
+            <span className="font-semibold capitalize">{data.invitation.name}</span>
+            <p>{data.greeting}</p>
           </div>
         </div>
+        ))
+      }
 
-        <div className="grid grid-cols-6">
-          <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>USER</AvatarFallback>
-          </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
-            <span className="font-semibold">Ucup Bin Selamet</span>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-6">
-          <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="space-y-5 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-md">
-            <span className="font-semibold">Ucup Bin Selamet</span>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi impedit rem at in a culpa corrupti quibusdam.</p>
-          </div>
-        </div>
       </div>
 
       {/* Section 6 */}

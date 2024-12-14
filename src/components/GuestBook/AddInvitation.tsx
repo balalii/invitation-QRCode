@@ -6,65 +6,52 @@ import { Banknote, SendHorizontal } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import InputForm from '../Form/InputForm';
 import ButtonForm from '../Form/ButtonForm';
+import { useFormState } from 'react-dom';
+import { createInvitation } from '@/actions/invitation.action';
+import toast from 'react-hot-toast';
+import { redirect } from 'next/navigation';
 
 export default function AddInvitation() {
-  // const dataAuth = useUser();
-  // const tokenUser = dataAuth.data?.token;
+     const [dialogOpen, setDialogOpen] = React.useState(false);
+   const [errorMessage, formAction] = useFormState(createInvitation, undefined);
 
-  //    const searchParams = useSearchParams();
-  //     const sortData = searchParams.get('filterData') && searchParams.get('filterData') ? (searchParams.get('filterData') as string) : '';
+   React.useEffect(() => {
+     // jika berhasil berikan notif
+     if (errorMessage && 'success' in errorMessage && errorMessage.success === true) {
+       toast('Data berhasil disimpan.', {
+         icon: '✔️',
+       });
+       setDialogOpen(false);
+const invitationText = `_Assalamualaikum Warahmatullahi Wabarakatuh_
 
-  //     const formattedDateRange = useFormattedDateRange();
-  //     const formattedDate = formattedDateRange;
-  //     // react query
-  //     const queryClient = useQueryClient();
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara kami.
 
-  //     const [errorMessage, formAction] = useFormState(addDebt, undefined);
+untuk info lengkap dari acara bisa kunjungi:
 
-  //     // nominal
-  //     const { nominal: nominal1, handleNominal: handleNominal1 } = useInputRupiah();
+${process.env.NEXT_PUBLIC_BASE_URL}/welcome/${errorMessage.codeUrl}
 
-  //     // Function to handle change in nominal inputs
-  //     const handleChange = (value: string) => {
-  //       handleNominal1(value);
-  //     };
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
 
-  //     const [dialogOpen, setDialogOpen] = useState(false);
+*Mohon maaf perihal undangan hanya dibagikan melalui pesan ini.*
 
-  //     useEffect(() => {
-  //       // jika berhasil berikan notif
-  //       if (errorMessage && 'status' in errorMessage && errorMessage.status === 200) {
-  //         toast({
-  //           title: 'Status Pembayaran',
-  //           description: 'Pembayaran berhasil ditambahkan!.',
-  //         });
-  //         // Reset nominal and valuePayment to default values
-  //         handleChange('');
-  //         // Close the dialog
-  //         setDialogOpen(false);
-  //       }
-  //       if (errorMessage && 'status' in errorMessage && errorMessage.status !== 200) {
-  //         toast({
-  //           title: 'Status Pembayaran',
-  //           description: 'Pembayaran gagal ditambahkan.',
-  //           variant: 'destructive',
-  //         });
-  //         // redirect('/ecommerce/products');
-  //       }
+Terima kasih banyak atas perhatiannya.
 
-  //       queryClient.invalidateQueries({ queryKey: ['purchaseOrder', formattedDate, sortData] });
-  //     }, [errorMessage, queryClient, toast]);
+_Wassalamualaikum Warahmatullahi Wabarakatuh_`;
+
+       const encodedText = encodeURIComponent(invitationText);
+       redirect(`https://api.whatsapp.com/send/?text=${encodedText}`);
+     }
+   }, [errorMessage, toast]);
 
   return (
-    // <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
         <Button className="bg-green-600">
           Kirim undangan <SendHorizontal />
         </Button>
       </DialogTrigger>
       <DialogContent className="py-12 lg:py-8 max-h-screen overflow-y-auto">
-        <form>
+        <form action={formAction}>
           <DialogHeader>
             <DialogTitle className="text-center lg:text-left ">Kirim Undangan</DialogTitle>
             <DialogDescription className=" space-y-2  ">
@@ -72,7 +59,7 @@ export default function AddInvitation() {
               <div className="text-left !mt-2  grid grid-cols-12 gap-4 ">
                 {/* <input type="text" name="token" hidden readOnly defaultValue={tokenUser} value={tokenUser} /> */}
                 <div className="col-span-full xl:col-span-12">
-                  <InputForm errors={undefined} type={'text'} id="name" label="Nama Penerima" />
+                  <InputForm errors={errorMessage} type={'text'} id="name" label="Nama Penerima" />
                 </div>
                 {/* <div className="col-span-full xl:col-span-6">
                   <InputForm errors={undefined} id="nominal" label="Nominal " value={'hallo'} />

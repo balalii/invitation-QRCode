@@ -1,51 +1,39 @@
 'use client';
-import { ScrollText, SendHorizontal, Banknote } from 'lucide-react';
 import { Button } from '../ui/button';
 import { DataTables } from '../DataTable/DataTables';
 import { ColumnDef } from '@tanstack/react-table';
-import FormatRupiah from '../elements/FormatRupiah';
 import AddBank from './AddBank';
+import { formatNumberByThree } from '@/lib/formatNumberByThree';
+import DeleteBank from './DeleteBank';
+import { Bank } from '@prisma/client';
 
-export const DATA_BANK = [
-  {
-    no: '504-434-434-323',
-    bank: 'BRI',
-  },
-  {
-    no: '543-534-534-878',
-    bank: 'Mandiri',
-  },
-  {
-    no: '543-455-534-878',
-    bank: 'BCA',
-  },
-];
 
-export default function ListBank() {
-  const constcolumns: ColumnDef<any>[] = [
+export default function ListBank({ bank }: { bank: Bank[] }) {
+  const constcolumns: ColumnDef<Bank>[] = [
     {
       accessorKey: 'no',
       header: 'No',
       cell: ({ row }) => <div className="capitalize">{row.index + 1}</div>,
     },
     {
-      accessorKey: 'bank',
+      accessorKey: 'name',
       header: 'Bank ',
-      cell: ({ row }) => <div className="capitalize pr-6">{row.getValue('bank')}</div>,
+      cell: ({ row }) => <div className="capitalize pr-6">{row.getValue('name')}</div>,
     },
     {
-      accessorKey: 'no',
+      accessorKey: 'recipient',
+      header: 'Nama Penerima ',
+      cell: ({ row }) => <div className="capitalize pr-6 min-w-36">{row.getValue('recipient')}</div>,
+    },
+    {
+      accessorKey: 'accountNumber',
       header: 'Nomor Rekening',
-      cell: ({ row }) => <div className="capitalize min-w-32">{row.getValue('no')}</div>,
+      cell: ({ row }) => <div className="capitalize min-w-32">{row.getValue('accountNumber')}</div>,
     },
     {
-      accessorKey: 'action',
+      accessorKey: 'id',
       header: 'Action',
-      cell: ({ row }) => (
-        <Button variant="destructive" className="text-xs">
-          Hapus
-        </Button>
-      ),
+      cell: ({ row }) => <DeleteBank id={row.getValue('id')} />,
     },
   ];
 
@@ -56,7 +44,7 @@ export default function ListBank() {
           <AddBank />
         </div>
         <div className="w-full">
-          <DataTables placeholderSearch1="Cari bank..." labelTable={`Daftar bank`} idColumnSearch1="bank" data={DATA_BANK as any[]} columns={constcolumns} />
+          <DataTables placeholderSearch1="Cari bank..." labelTable={`Daftar bank`} idColumnSearch1="name" data={bank as Bank[]} columns={constcolumns} />
         </div>
       </div>
     </>

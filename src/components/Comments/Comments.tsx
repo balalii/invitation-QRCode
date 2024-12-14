@@ -2,67 +2,33 @@
 import { Button } from '../ui/button';
 import { DataTables } from '../DataTable/DataTables';
 import { ColumnDef } from '@tanstack/react-table';
+import DeleteComment from './DeleteComment';
+import { Invitation, InvitationGreeting } from '@prisma/client';
 
-export const DATA_COMMENTS = [
-  {
-    name: 'Ucup bin slamet',
-    text: 'Ih ganteng bgt si ucup yak',
-  },
-  {
-    name: 'Asep bin slamet',
-    text: 'Ienggak gantengan gw',
-  },
-  {
-    name: 'Ucup bin slamet',
-    text: 'Ih ganteng bgt si ucup yak',
-  },
-  {
-    name: 'Asep bin slamet',
-    text: 'Ienggak gantengan gw',
-  },
-  {
-    name: 'Ucup bin slamet',
-    text: 'Ih ganteng bgt si ucup yak',
-  },
-  {
-    name: 'Asep bin slamet',
-    text: 'Ienggak gantengan gw',
-  },
-  {
-    name: 'Ucup bin slamet',
-    text: 'Ih ganteng bgt si ucup yak',
-  },
-  {
-    name: 'Asep bin slamet',
-    text: 'Ienggak gantengan gw',
-  },
-];
-
-export default function Comments() {
-  const constcolumns: ColumnDef<any>[] = [
+export default function Comments({ data }:{data:InvitationGreeting[]}) {
+  const constcolumns: ColumnDef<InvitationGreeting>[] = [
     {
       accessorKey: 'no',
       header: 'No',
       cell: ({ row }) => <div className="capitalize">{row.index + 1}</div>,
     },
     {
-      accessorKey: 'name',
-      header: 'Nama',
-      cell: ({ row }) => <div className="capitalize min-w-32">{row.getValue('name')}</div>,
+      accessorKey: 'invitation',
+      header: 'Nama pengirim ',
+      cell: ({ row }) => {
+        const data: Invitation = row.getValue('invitation');
+        return <div className="capitalize min-w-48">{data.name}</div>;
+      },
     },
     {
-      accessorKey: 'text',
+      accessorKey: 'greeting',
       header: 'Ucapan',
-      cell: ({ row }) => <div className="capitalize min-w-80">{row.getValue('text')}</div>,
+      cell: ({ row }) => <div className="capitalize min-w-80">{row.getValue('greeting')}</div>,
     },
     {
-      accessorKey: 'action',
+      accessorKey: 'id',
       header: 'Action',
-      cell: ({ row }) => (
-        <Button variant="destructive" className="text-xs">
-          Hapus
-        </Button>
-      ),
+      cell: ({ row }) => <DeleteComment id={row.getValue('id')} />,
     },
   ];
 
@@ -70,7 +36,7 @@ export default function Comments() {
     <>
       <div>
         <div className="w-full">
-          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar ucapan`} idColumnSearch1="name" data={DATA_COMMENTS as any[]} columns={constcolumns} />
+          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar ucapan`} idColumnSearch1="name" data={data as InvitationGreeting[]} columns={constcolumns} />
         </div>
       </div>
     </>
