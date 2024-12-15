@@ -242,7 +242,7 @@ export default async function InvitationPage() {
       <div className="px-5 space-y-7">
         <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
+            <AvatarImage src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png" />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
           <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
@@ -253,8 +253,8 @@ export default async function InvitationPage() {
 
         <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>USER</AvatarFallback>
+            <AvatarImage src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png" />
+            <AvatarFallback>U</AvatarFallback>
           </Avatar>
           <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
             <span className="font-semibold">Ucup Bin Selamet</span>
@@ -264,8 +264,8 @@ export default async function InvitationPage() {
 
         <div className="grid grid-cols-6">
           <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png" />
+            <AvatarFallback>U</AvatarFallback>
           </Avatar>
           <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
             <span className="font-semibold">Ucup Bin Selamet</span>
