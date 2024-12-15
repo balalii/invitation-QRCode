@@ -22,9 +22,9 @@ export default async function Page() {
     <div className="px-5 mx-auto mt-10 space-y-6 w-full">
       <div className="flex flex-col space-y-2">
         <h1 className="font-bold text-2xl capitalize">Buku tamu undangan</h1>
-        <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint atque quis ratione labore cum illum libero.</p>
+        <p className="text-sm text-gray-500">Disini anda dapat mengelola undangan dan menampilkan Kode QR untuk buku tamu.</p>
       </div>
-      <GuestBook invitation={invitation?.length !== 0 ? invitation as Invitation[] : [] } />
+      <GuestBook invitation={invitation?.length !== 0 ? (invitation as Invitation[]) : []} />
     </div>
   );
 }
