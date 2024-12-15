@@ -38,15 +38,15 @@ export default async function Page({ params }: { params: Promise<{ url: string }
   return (
     <main>
       <div className="container md:w-[500px] px-4  h-max-screen h-screen bg-white mx-auto flex flex-col items-center justify-center space-y-2">
-        <h1 className="text-6xl italianno text-gray-800">Wedding Invitation</h1>
+        <h1 className="text-5xl italianno text-gray-800">Wedding Invitation</h1>
 
-        <Image width={500} height={500} src="/assets/floraltop.png" alt="" className="w-3/4 mx-auto" />
+        <Image width={500} height={500} src="/assets/floraltop.png" alt="" className="w-3/4 mx-auto !-mb-6" />
 
         <h2 className="italianno text-6xl waterbrush text-gray-700 mt-4">Halim & Nisa</h2>
 
-        <Image width={500} height={500} src="/assets/floralbottom.png" alt="" className="w-3/4 mx-auto" />
+        <Image width={500} height={500} src="/assets/floralbottom.png" alt="" className="w-3/4 mx-auto !mt-4" />
 
-        <div className="!py-8 text-2xl capitalize">
+        <div className="!py-8 text-3xl capitalize">
           <span className="italianno">Kepada: {invited.name}</span>
         </div>
         <div className="space-y-5 w-full flex flex-col">
