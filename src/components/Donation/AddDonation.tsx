@@ -41,14 +41,14 @@ export default function AddDonation({bank, id}:{bank?:Bank[]; id?:number}) {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="uppercase mt-4 rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 !py-3 shadow">Kirim Hadiah</Button>
+        <Button className="uppercase mt-4 rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 !py-6 shadow">Kirim Hadiah</Button>
       </DialogTrigger>
       <DialogContent className="py-12 lg:py-8 max-h-screen overflow-y-auto">
         <form action={formAction}>
           <DialogHeader>
             <DialogTitle className="text-center lg:text-left ">Kirim Hadiah</DialogTitle>
             <DialogDescription className=" space-y-2  ">
-              <p className="pb-2 max-w-sm">Silahkan inputkan data yang sesuai di bawah ini untuk menambahkan data.</p>
+              <p className="pb-2 max-w-sm">Silahkan inputkan data yang sesuai di bawah.</p>
               <div className="text-left !mt-2  grid grid-cols-12 gap-4 ">
                 <input type="text" name="invitationId" hidden readOnly defaultValue={id} value={id} />
                 <div className="col-span-full xl:col-span-12">

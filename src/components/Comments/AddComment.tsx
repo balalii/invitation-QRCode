@@ -3,10 +3,11 @@ import { createInvitationGreeting } from "@/actions/invitationGreeting.action";
 import React, { useState } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
+import ButtonForm from '../Form/ButtonForm';
 
-export default function AddComments({lengthComment, id }: {lengthComment:number, id: number }) {
+export default function AddComments({ lengthComment, id }: { lengthComment: number; id: number }) {
   const [errorMessage, formAction] = useFormState(createInvitationGreeting, undefined);
-  const [greeting, setGreeting] = useState(""); // Track textarea value
+  const [greeting, setGreeting] = useState(''); // Track textarea value
 
   React.useEffect(() => {
     // If submission is successful, show the toast and clear the textarea
@@ -36,9 +37,7 @@ export default function AddComments({lengthComment, id }: {lengthComment:number,
           className="bg-[var(--secondary-color)] py-4 px-5 border-none rounded-xl w-full focus:outline-none"
         />
       </div>
-      <button type="submit" className="uppercase mt-4 rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 py-1.5 pb-2 shadow">
-        Kirim
-      </button>
+      <ButtonForm type="submit" className="uppercase mt-4 !rounded-full bg-[var(--primary-color)] text-lg font-bold text-white px-8 py-1.5 pb-2 shadow !w-fit" label={'Kirim'} />
     </form>
   );
 }

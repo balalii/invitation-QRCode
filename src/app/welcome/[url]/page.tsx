@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ url: stri
     return await MetaData({
       title: `Kepada: ${invited?.name}`,
       desc: ` Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan kami. `,
-      imgUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/wedding/1.png`,
+      imgUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/wedding/image 28.png`,
       linkUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/welcome/${invited?.code}`,
     });
   } catch (error) {
