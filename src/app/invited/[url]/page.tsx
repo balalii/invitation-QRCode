@@ -219,7 +219,7 @@ export default async function Page({ params }: { params: Promise<{ url: string }
         {invitationGreeting.map((data, idx) => (
           <div key={idx} className="grid grid-cols-6">
             <Avatar className="w-12 h-12">
-              <AvatarImage src="https://github.com/balalii.png" />
+              <AvatarImage src="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-gris.png" />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
             <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">

@@ -8,14 +8,10 @@ import { z } from 'zod';
 export async function getInvitationGreeting() {
   try {
     const invitationGreeting = await prisma.invitationGreeting.findMany({
-        orderBy: [
-    {
-      id: 'desc',
-    },
-  ],include:{
-    invitation:true
-  }
-    })
+      include: {
+        invitation: true,
+      },
+    });
     return { invitationGreeting }
   } catch (errorInvitationGreeting) {
     return { errorInvitationGreeting: 'Failed to fetch invitationGreeting' }

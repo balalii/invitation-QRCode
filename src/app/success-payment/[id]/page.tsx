@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
         <p className="mt-4 mb-3 ">Lakukan transfer melalui ATM, Mobile Banking, atau Internet Banking ke rekening berikut:</p>
 
-        <ol className="list-decimal list-outside mb-3">
+        <ol className="list-decimal list-outside mb-3 ml-6 space-y-1">
           <li>
             Pilih Bank: <b>{bank?.name}</b>
           </li>

@@ -12,7 +12,7 @@ export default function AddComments({ lengthComment, id }: { lengthComment: numb
   React.useEffect(() => {
     // If submission is successful, show the toast and clear the textarea
     if (errorMessage && 'success' in errorMessage && errorMessage.success === true) {
-      toast('Komentar berhasil dikirm.', {
+      toast('Komentar berhasil terkirim.', {
         icon: '✔️',
       });
       setGreeting(''); // Clear the textarea value
