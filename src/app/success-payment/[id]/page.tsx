@@ -14,22 +14,22 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   }
   return (
     <div className="h-[90%] pt-20 bg-white px-10">
-      
       <div className="">
-      <Image alt="" className="mb-6 w-[230px] " height={200} src="/assets/bunga.png" width={200} />
+        <Image alt="" className="mb-6 w-[230px] " height={200} src="/assets/bunga.png" width={200} />
         <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">Cara pembayaran</p>
 
         <p className="mt-4 mb-3 ">Lakukan transfer melalui ATM, Mobile Banking, atau Internet Banking ke rekening berikut:</p>
 
-        <ol className="list-decimal list-inside mb-3">
+        <ol className="list-decimal list-outside mb-3">
           <li>
             Pilih Bank: <b>{bank?.name}</b>
           </li>
           <li>
-            Masukan Nomor Rekening: <b>{bank?.accountNumber}</b>
+            Masukan Nomor Rekening: <br />
+            <b>{bank?.accountNumber}</b>
           </li>
           <li>
-            Pastikan Nama Penerima: <b className='uppercase'>{bank?.recipient}</b>
+            Pastikan Nama Penerima: <br /> <b className="uppercase">{bank?.recipient}</b>
           </li>
           <li>Masukan nominal transfer</li>
           <li>Selesai.</li>
