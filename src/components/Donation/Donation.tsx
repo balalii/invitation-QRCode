@@ -58,7 +58,7 @@ export default function Donation({data}:{data:Donation[]}) {
 
       <div>
         <div className="w-full">
-          <DataTables placeholderSearch1="Cari Nama..." labelTable={`Daftar sumbangan`} idColumnSearch1="name" data={data as Donation[]} columns={constcolumns} />
+          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar sumbangan`} idColumnSearch1="name" data={data as Donation[]} columns={constcolumns} />
         </div>
       </div>
     </>

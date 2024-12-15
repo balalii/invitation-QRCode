@@ -85,7 +85,7 @@ export default function GuestBook({ invitation }: { invitation: Invitation[] | [
               <AddInvitation />
             </div>
             <div className="w-full">
-              <DataTables placeholderSearch1="Cari Nama Nama..." labelTable={`Daftar tamu undangan`} idColumnSearch1="name" data={invitation as Invitation[]} columns={constcolumns} />
+              <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar tamu undangan`} idColumnSearch1="name" data={invitation as Invitation[]} columns={constcolumns} />
             </div>
           </div>
         </>
