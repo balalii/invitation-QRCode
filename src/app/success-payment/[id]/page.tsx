@@ -13,9 +13,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     notFound();
   }
   return (
-    <div className="h-[90%] pt-20 bg-white px-10">
+    <div className="h-[76lvh] pt-20 bg-white px-10 flex flex-col items-center justify-center ">
       <div className="">
-        <Image alt="" className="mb-6 w-[230px] " height={200} src="/assets/bunga.png" width={200} />
+        <Image alt="" className="mb-10 w-[280px]  mx-auto" height={200} src="/assets/bunga.png" width={200} />
         <p className="text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl">Cara pembayaran</p>
 
         <p className="mt-4 mb-3 ">Lakukan transfer melalui ATM, Mobile Banking, atau Internet Banking ke rekening berikut:</p>
