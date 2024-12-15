@@ -212,25 +212,22 @@ export default async function Page({ params }: { params: Promise<{ url: string }
       </div>
 
       {/* Section 5 */}
-      <AddComments lengthComment={invitationGreeting.length} id={invited.id}/>
+      <AddComments lengthComment={invitationGreeting.length} id={invited.id} />
 
       {/* Massage */}
       <div className="px-5 space-y-7">
-        {
-          invitationGreeting.map((data, idx)=>(
-            <div key={idx} className="grid grid-cols-6">
-          <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/balalii.png" />
-            <AvatarFallback>USER</AvatarFallback>
-          </Avatar>
-          <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
-            <span className="font-semibold capitalize">{data.invitation.name}</span>
-            <p>{data.greeting}</p>
+        {invitationGreeting.map((data, idx) => (
+          <div key={idx} className="grid grid-cols-6">
+            <Avatar className="w-12 h-12">
+              <AvatarImage src="https://github.com/balalii.png" />
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
+            <div className="space-y-2 bg-[var(--secondary-color)] p-3 rounded-xl col-span-5 shadow-sm">
+              <span className="font-semibold capitalize">{data.invitation.name}</span>
+              <p>{data.greeting}</p>
+            </div>
           </div>
-        </div>
-        ))
-      }
-
+        ))}
       </div>
 
       {/* Section 6 */}
