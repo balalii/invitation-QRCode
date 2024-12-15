@@ -54,7 +54,7 @@ export async function createBank(prevState: any, formData: FormData) {
     const dataForm = {
       name: parse.name,
       recipient: parse.recipient,
-      accountNumber: parseInt(parse.accountNumber),
+      accountNumber: parse.accountNumber,
     };
 
     // Prisma

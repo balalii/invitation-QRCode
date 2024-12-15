@@ -21,6 +21,8 @@ export default function AddBank() {
         icon: '✔️',
       });
       setDialogOpen(false);
+      console.log(errorMessage);
+      
     }
   }, [errorMessage, toast]);
 
