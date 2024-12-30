@@ -7,8 +7,11 @@ import { ColumnDef } from '@tanstack/react-table';
 import AddInvitation from './AddInvitation';
 import DeleteInvitation from './DeleteInvitation';
 import { Invitation } from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
 export default function GuestBook({ invitation }: { invitation: Invitation[] | [] }) {
+  const { data: session } = useSession();
+  const userRole = session?.user?.role as string;
 
   const constcolumns: ColumnDef<Invitation>[] = [
     {
@@ -38,7 +41,7 @@ export default function GuestBook({ invitation }: { invitation: Invitation[] | [
     {
       accessorKey: 'id',
       header: 'Action',
-      cell: ({ row }) => <DeleteInvitation id={row.getValue('id')} />,
+      cell: ({ row }) => <div className="capitalize min-w-32 text-center">{userRole === 'SUPERADMIN' ? <DeleteInvitation id={row.getValue('id')} /> : '-'} </div>,
     },
   ];
 
@@ -81,9 +84,7 @@ export default function GuestBook({ invitation }: { invitation: Invitation[] | [
           </div>
 
           <div>
-            <div className="flex justify-end mb-5">
-              <AddInvitation />
-            </div>
+            <div className="flex justify-end mb-5">{userRole === 'SUPERADMIN' && <AddInvitation />}</div>
             <div className="w-full">
               <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar tamu undangan`} idColumnSearch1="name" data={invitation as Invitation[]} columns={constcolumns} />
             </div>

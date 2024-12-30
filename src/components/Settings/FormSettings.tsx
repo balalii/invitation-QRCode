@@ -8,9 +8,12 @@ import { useFormState } from 'react-dom';
 import toast from 'react-hot-toast';
 import { Wedding } from '@prisma/client';
 import Signout from '../elements/Signout';
+import { useSession } from 'next-auth/react';
 
 export default function FormSettings({ wedding }: { wedding: Wedding }) {
-  // const { users, error } = await getUsers();
+  const { data: session } = useSession();
+  const userRole = session?.user?.role as string;
+
   // update setting
   const [errorMessage, formAction] = useFormState(updateWedding, undefined);
 
@@ -98,8 +101,8 @@ export default function FormSettings({ wedding }: { wedding: Wedding }) {
         </div>
       </div>
       <div className="flex md:flex-row flex-col-reverse items-center !space-y-0 justify-end  md:space-x-4 space-x-0 pt-8">
-        <Signout className='mt-4 md:mt-0'/>
-        <ButtonForm type="submit" className={`m-0 w-full lg:w-fit lg:!px-5 bg-[var(--primary-color)]`} label={'Simpan'} />
+        <Signout className="mt-4 md:mt-0" />
+        {userRole === 'SUPERADMIN' && <ButtonForm type="submit" className={`m-0 w-full lg:w-fit lg:!px-5 bg-[var(--primary-color)]`} label={'Simpan'} />}
       </div>
     </form>
   );

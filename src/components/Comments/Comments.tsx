@@ -4,8 +4,21 @@ import { DataTables } from '../DataTable/DataTables';
 import { ColumnDef } from '@tanstack/react-table';
 import DeleteComment from './DeleteComment';
 import { Invitation, InvitationGreeting } from '@prisma/client';
+import { useSession } from 'next-auth/react';
 
-export default function Comments({ data }:{data:InvitationGreeting[]}) {
+interface ICommentList extends InvitationGreeting {
+  invitation?: Invitation;
+}
+
+export default function Comments({ data }: { data: ICommentList[] }) {
+  const { data: session } = useSession();
+  const userRole = session?.user?.role as string;
+
+  const transformedData = data.map((item) => ({
+    ...item,
+    invitation: item.invitation?.name || 'Unknown',
+  }));
+
   const constcolumns: ColumnDef<InvitationGreeting>[] = [
     {
       accessorKey: 'no',
@@ -16,8 +29,7 @@ export default function Comments({ data }:{data:InvitationGreeting[]}) {
       accessorKey: 'invitation',
       header: 'Nama pengirim ',
       cell: ({ row }) => {
-        const data: Invitation = row.getValue('invitation');
-        return <div className="capitalize min-w-48">{data.name}</div>;
+        return <div className="capitalize min-w-48">{row.getValue('invitation')}</div>;
       },
     },
     {
@@ -28,7 +40,7 @@ export default function Comments({ data }:{data:InvitationGreeting[]}) {
     {
       accessorKey: 'id',
       header: 'Action',
-      cell: ({ row }) => <DeleteComment id={row.getValue('id')} />,
+      cell: ({ row }) => <div className="capitalize min-w-32 text-center">{userRole === 'SUPERADMIN' ? <DeleteComment id={row.getValue('id')} /> : '-'} </div>,
     },
   ];
 
@@ -36,7 +48,7 @@ export default function Comments({ data }:{data:InvitationGreeting[]}) {
     <>
       <div>
         <div className="w-full">
-          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar ucapan`} idColumnSearch1="name" data={data as InvitationGreeting[]} columns={constcolumns} />
+          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar ucapan`} idColumnSearch1="invitation" data={transformedData as InvitationGreeting[]} columns={constcolumns} />
         </div>
       </div>
     </>

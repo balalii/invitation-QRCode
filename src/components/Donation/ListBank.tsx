@@ -6,9 +6,12 @@ import AddBank from './AddBank';
 import { formatNumberByThree } from '@/lib/formatNumberByThree';
 import DeleteBank from './DeleteBank';
 import { Bank } from '@prisma/client';
-
+import { useSession } from 'next-auth/react';
 
 export default function ListBank({ bank }: { bank: Bank[] }) {
+  const { data: session } = useSession();
+  const userRole = session?.user?.role as string;
+
   const constcolumns: ColumnDef<Bank>[] = [
     {
       accessorKey: 'no',
@@ -33,16 +36,14 @@ export default function ListBank({ bank }: { bank: Bank[] }) {
     {
       accessorKey: 'id',
       header: 'Action',
-      cell: ({ row }) => <DeleteBank id={row.getValue('id')} />,
+      cell: ({ row }) => <div className="capitalize min-w-32 text-center">{userRole === 'SUPERADMIN' ? <DeleteBank id={row.getValue('id')} /> : '-'} </div>,
     },
   ];
 
   return (
     <>
       <div>
-        <div className="flex justify-end mb-5">
-          <AddBank />
-        </div>
+        <div className="flex justify-end mb-5">{userRole === 'SUPERADMIN' && <AddBank />}</div>
         <div className="w-full">
           <DataTables placeholderSearch1="Cari bank..." labelTable={`Daftar bank`} idColumnSearch1="name" data={bank as Bank[]} columns={constcolumns} />
         </div>

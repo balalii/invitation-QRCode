@@ -7,8 +7,16 @@ import AddInvitation from './AddBank';
 import FormatRupiah from '../elements/FormatRupiah';
 import type { Bank, Donation, Invitation } from '@prisma/client';
 
-export default function Donation({data}:{data:Donation[]}) {
- 
+interface IDonationList extends Donation {
+  invitation?: Invitation;
+}
+
+export default function Donation({ data }: { data: IDonationList[] }) {
+  const transformedData = data.map((item) => ({
+    ...item,
+    invitation: item.invitation?.name || 'Unknown',
+  }));
+
   const constcolumns: ColumnDef<Donation>[] = [
     {
       accessorKey: 'no',
@@ -18,17 +26,16 @@ export default function Donation({data}:{data:Donation[]}) {
     {
       accessorKey: 'invitation',
       header: 'Nama pengirim ',
-      cell: ({ row }) =>{
-        const invitation:Invitation = row.getValue('invitation')
-        return <div className="capitalize min-w-48">{invitation.name}</div>;
+      cell: ({ row }) => {
+        return <div className="capitalize min-w-56">{row.getValue('invitation')}</div>;
       },
     },
     {
       accessorKey: 'bank',
       header: 'Bank ',
-      cell: ({ row }) =>{
-        const bank:Bank = row.getValue('bank')
-        return <div className="capitalize min-w-48">{bank.name}</div>;
+      cell: ({ row }) => {
+        const bank: Bank = row.getValue('bank');
+        return <div className="capitalize min-w-32">{bank.name}</div>;
       },
     },
     {
@@ -58,7 +65,7 @@ export default function Donation({data}:{data:Donation[]}) {
 
       <div>
         <div className="w-full">
-          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar sumbangan`} idColumnSearch1="name" data={data as Donation[]} columns={constcolumns} />
+          <DataTables placeholderSearch1="Cari nama..." labelTable={`Daftar sumbangan`} idColumnSearch1="invitation" data={transformedData as Donation[]} columns={constcolumns} />
         </div>
       </div>
     </>
